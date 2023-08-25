@@ -1,0 +1,17 @@
+.container{
+    display: flex;
+    justify-content: space-between;
+    height: 50px;
+    align-items: center;
+    }
+    
+.social{
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.icon{
+opacity: 0.6;
+cursor: pointer;
+}

@@ -1,0 +1,34 @@
+.card{
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    position: relative;
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.item{
+    border: 5px solid #bbb;
+    border-radius: 5px;
+    width: 250px;
+    height: 200px;
+    position: relative;
+
+}
+
+.span{
+    right: 10px;
+    top:10px;
+    position: absolute;
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.img{
+    object-fit: cover;
+}
