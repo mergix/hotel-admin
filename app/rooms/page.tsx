@@ -16,21 +16,44 @@ import axios from 'axios';
 
 
 function  Rooms() {
+
+  const [option, setOption] = useState(null);
+  const [roomNumber, setroomNumber] = useState(null);
+  const [statusB, setStatus] = useState(null);
+  const [selectList, setSelectList] = useState([]);
+  const [roomList, setRoomList] = useState([]);
+
     useEffect(() => {
       fetch('https://localhost:7043/allRoomTypes')
       .then((res) => res.json())
       .then((data) => {
-        setList(data.result)
+        setSelectList(data.result)
         console.log(data)
         // setLoading(false)
-      })
+      });
+
+      fetch('https://localhost:7043/allRooms')
+      .then((res) => res.json())
+      .then((data) => {
+        setRoomList(data.result)
+        console.log(data)
+        // setLoading(false)
+      });
     }, []);
 
 
-  const [option, setOption] = useState(null);
-  const [roomNumber, setroomNumber] = useState(null);
-  const [status, setStatus] = useState(null);
-  const [list, setList] = useState(null);
+
+    const create = e =>{
+      e.preventDefault();  
+     axios.post('https://localhost:7043/CreateRoom', 
+     {roomNo:roomNumber,
+      roomTypeName:option,
+      status:statusB
+      }).then(res => {
+      console.log(res.data)
+     }).catch(err => console.log(err))
+    }
+
 
 
 
@@ -41,19 +64,19 @@ function  Rooms() {
     <Button text={"Create New Room Type"} url={"/rooms/roomType"}/>
     <h1 className={styles.title}>Recent Rooms</h1>
     <div className={styles.grid} >
-      {/* {data.then(res => res.result.map((item) => (
+      {roomList.map((item) => (
       <RoomCard link={`/rooms/testId`}  img={"/Img/placeholder.jpg"} No={item.roomNo} title={item.roomType.roomtypeName} desc={item.roomType.description} status={item.status} />
-        )))} */}
+        ))}
     </div>
     <h1 className={styles.title}>Create New a Room</h1>
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={create}>
     {/* <label for="">Choose a Room Type:</label> */}
     <select 
           value={"roomType"}
           onChange={(e) => setOption(e.target.value)}
          >
           <option value="">Select</option>
-          {list && list.map((option: any) => (
+          {selectList && selectList.map((option: any) => (
            <option key={option.id} 
             value={option.roomtypeName}
            >
@@ -61,25 +84,28 @@ function  Rooms() {
           </option>
         ))}
        </select>
-        <input type='text'
-        minLength={1}
-        maxLength={3}
+        <input type='number'
+        min="1"
+        max="999"
         placeholder='number' 
         className={styles.input}
-        onChange={(e) => setroomNumber(e.target.value)}/>
+        onChange={(e) => setroomNumber(parseInt(e.target.value))}
+        required/>
         <fieldset>
   <legend>Room Status:</legend>
   <div>
-    <input type="radio" id="huey" name="drone" value="huey"  />
+    <input type="radio" id="huey" name="drone" value={0} onChange={(e) => setStatus(parseInt(e.target.value))} />
     <label>Available</label>
   </div>
 
   <div>
-    <input type="radio" id="dewey" name="drone" value="dewey" />
+    <input type="radio" id="dewey" name="drone" value={1} onChange={(e) => setStatus(parseInt(e.target.value))}/>
     <label>Booked</label>
   </div>
 </fieldset>
- <Button text={"Create"} url={"/test"}/>
+<button className={styles.Button}>
+        Create
+        </button>
         </form>
   </div>
   )

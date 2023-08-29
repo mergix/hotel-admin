@@ -72,7 +72,7 @@ formData.append("roomType", roomTypeObj);
   return (
     <div className={styles.container}>
     <h1 className={styles.title}>Room Types</h1>
-    <h1 className={styles.title}>Latest Created</h1>
+    <h1 className={styles.title}>Latest Created </h1>
     <div className={styles.grid} >
     {data.then(res => res.result.map((item) => (
       <RoomCard link={`/rooms/testId`}  img={"data:image/jpg;base64,"+ item.roomPicture+""} No={item.cost} title={item.roomtypeName} desc={item.description} status={item.lastModified} />
@@ -106,7 +106,9 @@ formData.append("roomType", roomTypeObj);
         { imageUrl && <Image src={viewImageUrl} alt="" fill={true} /> }
         </div>
         </div>
-        <Button text={"Create"} url={"/test"}/>
+        <button className={styles.Button}>
+        Create
+        </button>
         </form>
   </div>
   )
