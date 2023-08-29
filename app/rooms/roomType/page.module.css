@@ -1,5 +1,8 @@
 .container{
     margin: 20px 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
    }
    
    
@@ -7,6 +10,8 @@
        display: grid;
        gap: 40px;
        grid-template-columns: repeat(3, 1fr);
+       /* padding: 20px;
+       margin: 20px 0px; */
    }
    
    /* comment */
@@ -49,6 +54,26 @@
        display: flex;
        flex-direction: column;
        gap: 20px;
+   }
+
+   .formContainer{
+    flex: 1;
+    display: flex;
+    gap: 20px;
+}
+
+   .formText{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+   }
+
+   .imgViewer{
+    flex: 1;
+    border: 5px solid #bbb;
+    border-radius: 5px;
+    position: relative;
    }
    
    .input , .textArea{

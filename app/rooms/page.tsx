@@ -1,6 +1,6 @@
 "use client";
 import React from 'react'
-import { useState } from 'react';
+import { useState ,useEffect } from 'react';
 import styles from "./page.module.css";
 import Link from 'next/link'
 import Button from "../../components/button/Button"
@@ -9,30 +9,31 @@ import axios from 'axios';
 
 
 
-// async function getData() {
-//   const res = await axios.get('http://localhost:5279/allRooms', 
-//   { withCredentials:true });
-  
-//   if (!res.data) {
-//     console.log("bad")
-//   }
- 
-//   return res.data;
-// }
 
 
- async function  Rooms() {
 
 
-const [file, setFile] = useState();
 
-const handleFileChange = (e) => {
-  if (e.target.files) {
-    setFile(e.target.files[0]);
-  }
-};
 
-  // const data = getData();
+function  Rooms() {
+    useEffect(() => {
+      fetch('https://localhost:7043/allRoomTypes')
+      .then((res) => res.json())
+      .then((data) => {
+        setList(data.result)
+        console.log(data)
+        // setLoading(false)
+      })
+    }, []);
+
+
+  const [option, setOption] = useState(null);
+  const [roomNumber, setroomNumber] = useState(null);
+  const [status, setStatus] = useState(null);
+  const [list, setList] = useState(null);
+
+
+
  
   return (
     <div className={styles.container}>
@@ -46,25 +47,39 @@ const handleFileChange = (e) => {
     </div>
     <h1 className={styles.title}>Create New a Room</h1>
     <form className={styles.form}>
-    <label for="pet-select">Choose a Room Type:</label>
+    {/* <label for="">Choose a Room Type:</label> */}
+    <select 
+          value={"roomType"}
+          onChange={(e) => setOption(e.target.value)}
+         >
+          <option value="">Select</option>
+          {list && list.map((option: any) => (
+           <option key={option.id} 
+            value={option.roomtypeName}
+           >
+          {option.roomtypeName}
+          </option>
+        ))}
+       </select>
+        <input type='text'
+        minLength={1}
+        maxLength={3}
+        placeholder='number' 
+        className={styles.input}
+        onChange={(e) => setroomNumber(e.target.value)}/>
+        <fieldset>
+  <legend>Room Status:</legend>
+  <div>
+    <input type="radio" id="huey" name="drone" value="huey"  />
+    <label>Available</label>
+  </div>
 
-<select name="pets" id="pet-select">
-  <option value="">--Please choose an option--</option>
-  <option value="dog">Dog</option>
-</select>
-        <input type='text' placeholder='number' className={styles.input}/>
-        <input type='text' placeholder='roomName' className={styles.input}/>
-        <input type='text' placeholder='cost' className={styles.input}/>
-        <textarea 
-        className={styles.textArea} 
-        placeholder='description'
-        cols="30"
-        rows="10"
-        />
-
-        <button className={styles.button}>
-          Send
-        </button>
+  <div>
+    <input type="radio" id="dewey" name="drone" value="dewey" />
+    <label>Booked</label>
+  </div>
+</fieldset>
+ <Button text={"Create"} url={"/test"}/>
         </form>
   </div>
   )
