@@ -2,8 +2,8 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import styles from "./page.module.css";
-import RoomCard from '../../../components/roomCard/RoomCard';
-import Button from '../../../components/button/Button';
+import RoomCard from '../../../../components/roomCard/RoomCard';
+import Button from '../../../../components/button/Button';
 import Image from "next/image";
 import Link from 'next/link'
 import axios from 'axios';

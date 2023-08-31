@@ -1,5 +1,6 @@
-import Navbar from "../components/navbar/navBar"
-import Footer from "../components/footer/Footer"
+import Navbar from "../../components/navbar/navBar"
+import Footer from "../../components/footer/Footer"
+import AuthProvider from "./context/AuthProvider"
 import './global.css';
 
 export const metadata = {
@@ -15,11 +16,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <AuthProvider>
         <main className='container'>
           <Navbar />
         {children}
         <Footer />
         </main>
+        </AuthProvider>
       </body>
     </html>
   )

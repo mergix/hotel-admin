@@ -1,0 +1,36 @@
+.container{
+
+}
+
+.registerWrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #b4afaf;
+
+ }
+ .form{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center;
+    align-items: center; */
+    color: #bff;
+
+ }
+
+ .twobytwo{
+    display: grid;
+    gap: 40px;
+    grid-template-columns: repeat(2, 1fr);
+ }
+
+ .input {
+    padding: 20px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #bbb;
+    border: 3px solid #bbb;
+    font-size: 20px;
+    font-weight: 300;
+}

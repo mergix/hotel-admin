@@ -3,8 +3,8 @@ import React from 'react'
 import { useState ,useEffect } from 'react';
 import styles from "./page.module.css";
 import Link from 'next/link'
-import Button from "../../components/button/Button"
-import RoomCard from "../../components/roomCard/RoomCard"
+import Button from "../../../components/button/Button"
+import RoomCard from "../../../components/roomCard/RoomCard"
 import axios from 'axios';
 
 
