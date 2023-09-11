@@ -24,7 +24,7 @@ function Login() {
     userPassword: password,
    }).then(res => {
     console.log(res.data)
-    router.push("/")
+    // router.push("/")
    }).catch(err => console.log(err))
   }
   return (

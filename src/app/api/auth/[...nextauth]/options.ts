@@ -1,18 +1,19 @@
 import type { NextAuthOptions } from "next-auth";
 import  CredentialsProvider  from "next-auth/providers/credentials";
+import { signIn } from "next-auth/react";
 
 
 export const options: NextAuthOptions = {
     providers:[
         CredentialsProvider({
-            name:"Credentials",
+            name:"credentials",
             credentials: {
-                username: {
+                userEmail: {
                     label: "Username:",
                     type: "text",
                     placeholder: "your-cool-username"
                 },
-                password: {
+                userPassword: {
                     label: "Password:",
                     type: "password",
                     placeholder: "your-awesome-password"
@@ -28,9 +29,9 @@ export const options: NextAuthOptions = {
                 const res = await fetch("https://localhost:7043/LoginAdmin'", {
                   method: 'POST',
                   body: JSON.stringify(credentials),
-                  headers: { "Content-Type": "application/json" }
                 })
                 const user = await res.json()
+                console.log(res)
           
                 // If no error and we have user data, return it
                 if (res.ok && user) {
@@ -41,4 +42,7 @@ export const options: NextAuthOptions = {
               }
         })
     ],
+    // pages:{
+    //     signIn:"/auth/signin",
+    // },
 }
