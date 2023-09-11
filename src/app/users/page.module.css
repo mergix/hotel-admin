@@ -1,3 +1,30 @@
 .container{
 
    }
+
+   .tableRow:hover {background-color: #9bb265;} 
+
+t, td {
+     border-bottom: 1px solid #ddd;
+   } 
+
+ th {
+     background-color: #25383C;
+     color: white;
+   }
+
+   tr:nth-child(even) {
+     background-color: #25383C;
+     color: white;
+ }
+ tr:nth-child(even) td:last-child button {
+     background-color: white;
+     color: #150f0f;
+ }
+   table{
+     width: 100%;
+   }
+
+   td {
+     text-align: center;
+   }
