@@ -14,7 +14,7 @@ async function getData() {
   const res = await axios.get('http://localhost:5279/allRoomTypes', 
   { withCredentials:true });
   
-  if (!res.data) {
+  if (!res) {
     console.log("bad")
   }
  
