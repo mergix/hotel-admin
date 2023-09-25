@@ -23,6 +23,21 @@ function  Rooms() {
   const [selectList, setSelectList] = useState([]);
   const [roomList, setRoomList] = useState([]);
 
+  const category = ["test2","43343"];
+  const options = [
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' },
+  ];
+
+  // <Select
+  // value={option}
+  // onChange={(e) => setOption(e)}
+  // isMulti
+  // className=''
+  // options={options}
+  // />
+
     useEffect(() => {
       fetch('https://localhost:7043/allRoomTypes')
       .then((res) => res.json())

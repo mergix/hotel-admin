@@ -1,0 +1,79 @@
+.card{
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+    position: relative;
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.item{
+    border: 5px solid #bbb;
+    border-radius: 5px;
+    width: 250px;
+    height: 200px;
+    position: relative;
+
+}
+
+.span{
+    right: 10px;
+    top:10px;
+    position: absolute;
+}
+
+.info{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.img{
+    object-fit: cover;
+}
+
+.grid{
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.dialog{
+    width: 500px;
+}
+
+.form{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.formContainer{
+    flex: 1;
+    display: flex;
+    gap: 20px;
+}
+
+.formPicker{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    flex: 1;
+   }
+
+.formCalender{
+    display: flex;
+    gap: 20px;
+    flex: 1;
+   }
+
+.imgViewer{
+    display: flex;
+    border: 5px solid #bbb;
+    border-radius: 5px;
+    position: relative;
+    height: 300px;
+    width: 300px;
+   }

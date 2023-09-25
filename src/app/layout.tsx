@@ -2,6 +2,7 @@ import Navbar from "../../components/navbar/navBar"
 import Footer from "../../components/footer/Footer"
 import AuthProvider from "./context/AuthProvider"
 import './global.css';
+// import 'react-calendar/dist/Calendar.css';
 
 export const metadata = {
   title: 'Next.js',

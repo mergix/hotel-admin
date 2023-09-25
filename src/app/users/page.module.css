@@ -4,7 +4,7 @@
 
    .tableRow:hover {background-color: #9bb265;} 
 
-t, td {
+/* t, td {
      border-bottom: 1px solid #ddd;
    } 
 
@@ -27,4 +27,4 @@ t, td {
 
    td {
      text-align: center;
-   }
+   } */

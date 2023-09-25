@@ -22,6 +22,7 @@ function Users() {
 
  
   return (
+    <>
     <div className={styles.container}>
     <h1 className={styles.title}>Users</h1>
     {/* <Button text={"Create New Room Type"} url={"/rooms/roomType"}/> */}
@@ -39,20 +40,25 @@ function Users() {
     </tr>
   </thead>
   <tbody>
-    <tr className={styles.tableRow}>
-    <td className={styles.tableDiv}>test</td>
-    <td className={styles.tableDiv}>test</td>
-    <td className={styles.tableDiv}>test</td>
-    <td className={styles.tableDiv}>test</td>
-    <td className={styles.tableDiv}>test</td>
-    <td className={styles.tableDiv}>test</td>
-
-    <td className={styles.tableButton}>Button view</td>
+      {userList.map(p=> (
+        
+        <tr className={styles.tableRow}>
+        <td className={styles.tableDiv}>{p.firstName}</td>
+        <td className={styles.tableDiv}>{p.lastName}</td>
+        <td className={styles.tableDiv}>{p.userEmail}</td>
+        <td className={styles.tableDiv}>{p.lastModified}</td>
+        <td className={styles.tableDiv}>{p.address}</td>
+        <td className={styles.tableDiv}>{p.phoneNo}</td>
+        <td className={styles.tableButton}>Button view</td>
+        
   </tr>
+      ))}
+
     </tbody>
   </table>
     </div>
   </div>
+  </>
   )
 }
 
