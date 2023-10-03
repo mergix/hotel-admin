@@ -16,7 +16,7 @@ interface CalendarProps{
   closedDays: string[] // as ISO strings
 }
 
-const CalendarComponent: FC<CalendarProps> = () =>{
+function Calendar2(){
   const [date, setDate] = useState<DateType>({
     justDate: null,
     dateTime: null,
@@ -51,7 +51,7 @@ const CalendarComponent: FC<CalendarProps> = () =>{
         <div>
           {times?.map((time,i) => (
               <div> 
-                <button type='button' onClick={() => localStorage.setItem('startTime',time)}>
+                <button type='button' onClick={() => localStorage.setItem('endTime',time)}>
                 {format(time,"kk:mm")}
                 </button>
               </div>
@@ -68,4 +68,4 @@ const CalendarComponent: FC<CalendarProps> = () =>{
   );
 }
 
-export default CalendarComponent
+export default Calendar2

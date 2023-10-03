@@ -6,55 +6,89 @@ import Image from 'next/image'
 import Link from 'next/link'
 import {
  Dialog, DialogTitle,
-  DialogContent, DialogContentText, DialogActions
+  DialogContent, DialogActions
 } from '@mui/material'
 import Calendar from '../../../components/calendar/index';
+import Calender2 from '../../../components/calender2/index';
 import axios from 'axios';
+import Calendar2 from '../../../components/calender2/index';
 
 function Bookings() {
 
   const [option, setOption] = useState(null);
   const [room, setRoom] = useState(null);
+  const [roomList, setRoomList] = useState([]);
   const [open, setOpen] = React.useState(false);
   const [selectedImage, setSelectedImage] = useState(null);
   const [viewImageUrl, setViewImageUrl] = useState(null);
   const [imageUrl, setImageUrl] = useState(null);
 
+  // function getData() {
+  //   const res =   axios.get('http://localhost:5279/allRooms');
+
+
+    
+  //   if (!res) {
+  //     console.log("bad")
+  //   }
+   
+  //   return res;
+  // }
+  
   const handleOpen = () => {
     setOpen(true);
-    console.log("works")
+
   };
 
   const handleClose = () => {
     setOpen(false);
+    console.log("works")
   };
 
   const pick = (item) => {
-    setRoom(item.roomPicture);
-     setSelectedImage(item.roomPicture);
-     console.log("works")
+     setRoom(item.id);
+     setSelectedImage(item.roomType.roomPicture);
+     console.log(room)
+    handleClose();
   };
 
-   function getData() {
-    const res =  axios.get('https://localhost:7043/allRooms', 
-    { withCredentials:true });
-    
-    if (!res.data) {
-      console.log("bad")
+
+  
+  useEffect(() => {
+    fetch(`http://localhost:5279/allRooms`)
+    .then(res =>{
+      return res.json()
+    }).then(
+      data => {
+        setRoomList(data.result)
+        console.log(roomList)
+      }
+    ).catch(err => console.log(err))
+  },[])
+  
+  useEffect(() => {
+    if (selectedImage) {
+      setViewImageUrl("data:image/jpg;base64,"+ selectedImage+"");
+      setImageUrl(selectedImage);
+      console.log(imageUrl)
     }
-   
-    return res.data;
+  }, [selectedImage]);
+  // const data = getData();
+
+
+  const create = e =>{
+    e.preventDefault();  
+   axios.post('https://localhost:7043/api/Booking', 
+   {
+    "dateIn": localStorage.getItem("startTime"),
+    "dateOut": localStorage.getItem("endTime"),
+    "roomid": room,
+    "userid": "f1e03bc6-2f4d-4ee1-aa7e-e127535452a6"
+    }).then(res => {
+    console.log(res.data)
+   }).catch(err => console.log(err))
   }
 
-  const data = getData();
-
-    useEffect(() => {
-      if (selectedImage) {
-        setViewImageUrl(URL.createObjectURL(selectedImage));
-        setImageUrl(selectedImage);
-        console.log(imageUrl)
-      }
-    }, [selectedImage]);
 
 
   return (
@@ -90,7 +124,7 @@ function Bookings() {
     </div>
 
     <h1 className={styles.title}>Create New a Booking</h1>
-    <form className={styles.form}>
+    <form className={styles.form} onSubmit={create}>
 
 <div>
 
@@ -116,11 +150,11 @@ function Bookings() {
         <DialogContent >
         <div className={styles.grid} >
 
-        {data.then(res => res.result.map((item) => (
-          <div className={styles.card} suppressHydrationWarning={true}>
-    <div onClick={(e) => pick(item)} className={styles.item}>
-    <Image alt="" src={"data:image/jpg;base64,"+ item.roomPicture+""} fill={true} className="img" />
-    <p className={styles.span}>{"Number"}</p>
+        {/* {data.then(res => res.result.map((item) => (
+          <div onClick={() => pick(item)} className={styles.card} suppressHydrationWarning={true}>
+    <div  className={styles.item}>
+    <Image alt="" src={"data:image/jpg;base64,"+ item.roomType.roomPicture+""} fill={true} className="img" />
+    <p className={styles.span}>{item.roomNo}</p>
     </div>
     <div className={styles.info}>
     <h1>{"title"}</h1>
@@ -128,7 +162,21 @@ function Bookings() {
     <p>{"status"}</p>
     </div>
     </div>
-        )))}
+        )))} */}
+
+{roomList.map((item) => (
+          <div onClick={() => pick(item)} className={styles.card} suppressHydrationWarning={true}>
+    <div  className={styles.item}>
+    <Image alt="" src={"data:image/jpg;base64,"+ item.roomType.roomPicture+""} fill={true} className="img" />
+    <p className={styles.span}>{item.roomNo}</p>
+    </div>
+    <div className={styles.info}>
+    <h1>{"title"}</h1>
+    <p>{"desc"}</p>
+    <p>{"status"}</p>
+    </div>
+    </div>
+        ))}
         </div>
         </DialogContent>
         <DialogActions>
@@ -141,9 +189,9 @@ function Bookings() {
 
 </div>
 <div className={styles.formCalender}>
-<Calendar/>
+<Calendar />
 
-<Calendar/>
+<Calendar2/>
 </div>
 
 </div>
